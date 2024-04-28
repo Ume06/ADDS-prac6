@@ -1,4 +1,5 @@
 #include <iostream>
+#include <climits>
 #include "LinkedList.h"
 #include "Node.h"
 LinkedList::LinkedList() {
@@ -54,4 +55,27 @@ bool LinkedList::deletePosition(int pos) {
   if (temp == nullptr)
     return false;
   temp->setLink(temp->getLink()->getLink());
+}
+
+int LinkedList::get(int pos) {
+  Node* temp = head;
+  while (pos > 1 && temp != nullptr) {
+    temp = temp->getLink();
+    pos--;
+  }
+  if (temp == nullptr)
+    return INT_MAX;
+  return temp->getVal();
+}
+
+int LinkedList::search(int target) {
+  Node* temp = head;
+  int pos = 1;
+  while (temp != nullptr) {
+    if (temp->getVal() == target)
+      return pos;
+    temp = temp->getLink();
+    pos++;
+  }
+  return -1;
 }
