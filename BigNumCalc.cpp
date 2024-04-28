@@ -52,6 +52,8 @@ std::list<int> BigNumCalc::sub(std::list<int> num1, std::list<int> num2) {
 }
 
 std::list<int> BigNumCalc::mul(std::list<int> num1, std::list<int> num2) {
+  if (num1.empty() || num2.empty() || num1.front() == 0 || num2.front() == 0)
+    return {0};
   std::list<int> result{0};
   int zeroes = 0, carry = 0;
 
