@@ -17,17 +17,22 @@ std::list<int> BigNumCalc::add(std::list<int> num1, std::list<int> num2) {
   int carry = 0;
   while(!num1.empty() || !num2.empty()) {
     int temp = num1.back() + num2.back() + carry;
+    if (num1.empty())
+      temp = num2.back() + carry;
+    if (num2.empty())
+      temp = num1.back() + carry;
+    std::cout << temp << std::endl;
     num1.pop_back();
     num2.pop_back();
     if (temp > 9) {
       carry = 1;
-      temp -= 10;
+      temp %= 10;
     } else {
       carry = 0;
     }
     result.push_front(temp);
   }
-  if (carry == 1) {
+  if (carry > 1) {
     result.push_front(1);
   }
   return result;
@@ -52,12 +57,12 @@ std::list<int> BigNumCalc::sub(std::list<int> num1, std::list<int> num2) {
 }
 
 std::list<int> BigNumCalc::mul(std::list<int> num1, std::list<int> num2) {
-  if (num1.empty() || num2.empty() || num1.front() == 0 || num2.front() == 0)
-    return {0};
   std::list<int> result{0};
   int zeroes = 0, carry = 0;
 
   while(!num1.empty()) {
+    if (num1.empty() || num2.empty() || num1.back() == 0 || num2.back() == 0)
+      return {0};
     std::list<int> temp, tempNum2 = num2;
 
     while(!tempNum2.empty()) {
@@ -80,7 +85,9 @@ std::list<int> BigNumCalc::mul(std::list<int> num1, std::list<int> num2) {
       temp.push_back(0);
     }
     zeroes++;
+
     result = add(temp, result);
+
     num1.pop_back();
   }
     
