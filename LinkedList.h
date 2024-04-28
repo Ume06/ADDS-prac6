@@ -5,14 +5,14 @@
 class LinkedList {
   public:
     LinkedList();
-    LinkedList(int*, int);
+    LinkedList(int* array, int len);
     ~LinkedList();
 
-    void insertPosition(int, int);
-    bool deletePosition(int);
+    void insertPosition(int pos, int newNum);
+    bool deletePosition(int pos);
 
-    int get(int);
-    int search(int);
+    int get(int pos);
+    int search(int target);
     void printList();
     
   private:

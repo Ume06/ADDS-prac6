@@ -1,5 +1,5 @@
 #include <iostream>
-#include <climits>
+#include <limits>
 #include "LinkedList.h"
 #include "Node.h"
 LinkedList::LinkedList() {
@@ -64,7 +64,7 @@ int LinkedList::get(int pos) {
     pos--;
   }
   if (temp == nullptr)
-    return INT_MAX;
+    return std::numeric_limits<int>::max();
   return temp->getVal();
 }
 
