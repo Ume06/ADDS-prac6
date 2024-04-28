@@ -66,7 +66,6 @@ int LinkedList::get(int pos) {
     return std::numeric_limits<int>::max();
   Node* temp = head;
   while (pos > 1) {
-    std::cout << "val: " << temp->getVal() << std::endl;
     if (temp->getLink() == nullptr)
       return std::numeric_limits<int>::max();
     temp = temp->getLink();
