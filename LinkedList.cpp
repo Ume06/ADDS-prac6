@@ -39,10 +39,14 @@ void LinkedList::printList() {
 
 void LinkedList::insertPosition(int pos, int newNum) {
   Node* temp = head;
-  while (pos > 2 && temp != nullptr) { // -2 because indexing starts at 1
+  while (pos > 2) { // -2 because indexing starts at 1
+    if (temp->getLink() == nullptr)
+      break;
     temp = temp->getLink();
     pos--;
   }
+  if (temp == nullptr)
+    temp->setLink(new Node(newNum));
   temp->setLink(new Node(newNum, temp->getLink()));
 }
 
@@ -58,13 +62,16 @@ bool LinkedList::deletePosition(int pos) {
 }
 
 int LinkedList::get(int pos) {
+  if (pos < 1)
+    return std::numeric_limits<int>::max();
   Node* temp = head;
-  while (pos > 1 && temp != nullptr) {
+  while (pos > 1) {
+    std::cout << "val: " << temp->getVal() << std::endl;
+    if (temp->getLink() == nullptr)
+      return std::numeric_limits<int>::max();
     temp = temp->getLink();
     pos--;
   }
-  if (temp == nullptr)
-    return std::numeric_limits<int>::max();
   return temp->getVal();
 }
 
